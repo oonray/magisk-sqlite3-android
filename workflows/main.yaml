@@ -9,7 +9,7 @@ jobs:
   armv7:
     runs-on: ubuntu-latest
     env:
-      ABI="armv7"
+      ABI="armeabi-v7a"
     steps:
       - uses: actions/checkout@v2
       - run: curl -Lo /tmp/android-ndk.zip $NDK_DL
@@ -21,14 +21,16 @@ jobs:
       - name: compile
         run: make
         workdir: sqlite-$ABI
+      - name: Copy bin to zip
+        run: cp $GITHUB_WORKSPACE/android-$ABI/obj/local/$ABI/sqlite3-static $GITHUB_WORKSPACE/magisk-module/system/xbin/sqlite3
       - name: make magisk module
-        run: zip -b $GITHUB_WORKSPACE/magisk-module /tmp/armv7/sqlite-$ABI.zip
+        run: zip -b $GITHUB_WORKSPACE/magisk-module/* /tmp/armv7/sqlite-$ABI.zip
         workdir: /tmp/$ABI/
       - name: publish
         uses: actions/upload-artifact@v2
         with:
           name: artifacts
-          path: /tmp/armv7/sqlite-$ABI.zip
+          path: /tmp/$ABI/sqlite-$ABI.zip
   x86_64:
     runs-on: ubuntu-latest
     env:
@@ -44,12 +46,16 @@ jobs:
       - name: compile
         run: make
         workdir: sqlite-$ABI
+      - name: Copy bin to zip
+        run: cp $GITHUB_WORKSPACE/android-$ABI/obj/local/$ABI/sqlite3-static $GITHUB_WORKSPACE/magisk-module/system/xbin/sqlite3
       - name: make magisk module
+        run: zip -b $GITHUB_WORKSPACE/magisk-module/* /tmp/armv7/sqlite-$ABI.zip
+        workdir: /tmp/$ABI/
       - name: publish
         uses: actions/upload-artifact@v2
         with:
           name: artifacts
-          path: /tmp/armv7/sqlite-armv7.zip
+          path: /tmp/$ABI/sqlite-$ABI.zip
   all:
     runs-on: ubuntu-latest
     env:
@@ -65,9 +71,13 @@ jobs:
       - name: compile
         run: make
         workdir: sqlite-$ABI
+      - name: Copy bin to zip
+        run: cp $GITHUB_WORKSPACE/android-$ABI/obj/local/$ABI/sqlite3-static $GITHUB_WORKSPACE/magisk-module/system/xbin/sqlite3
       - name: make magisk module
+        run: zip -b $GITHUB_WORKSPACE/magisk-module/* /tmp/armv7/sqlite-$ABI.zip
+        workdir: /tmp/$ABI/
       - name: publish
         uses: actions/upload-artifact@v2
         with:
           name: artifacts
-          path: /tmp/armv7/sqlite-armv7.zip
+          path: /tmp/$ABI/sqlite-$ABI.zip
