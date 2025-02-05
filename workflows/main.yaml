@@ -1,0 +1,73 @@
+name: build
+on: [push]
+env:
+  NDK_DL="https://dl.google.com/android/repository/android-ndk-r27c-linux.zip"
+  NDK_PATH="/opt/ndk/android-ndk"
+  SQLITE_VERSION=3480000
+  SQLITE_YEAR=2025
+jobs:
+  armv7:
+    runs-on: ubuntu-latest
+    env:
+      ABI="armv7"
+    steps:
+      - uses: actions/checkout@v2
+      - run: curl -Lo /tmp/android-ndk.zip $NDK_DL
+      - run: unzip /tmp/android-ndk.zip -d /opt/ndk/
+      - run: mv /opt/ndk/android-ndk-* $NDK_PATH
+      - run: export PATH="$PATH:$NDK_PATH"
+      - run: sudo apt-get install -y zip unzip make
+      - run: mkdir /tmp/$ABI
+      - name: compile
+        run: make
+        workdir: sqlite-$ABI
+      - name: make magisk module
+        run: zip -b $GITHUB_WORKSPACE/magisk-module /tmp/armv7/sqlite-$ABI.zip
+        workdir: /tmp/$ABI/
+      - name: publish
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifacts
+          path: /tmp/armv7/sqlite-$ABI.zip
+  x86_64:
+    runs-on: ubuntu-latest
+    env:
+      ABI="x86_64"
+    steps:
+      - uses: actions/checkout@v2
+      - run: curl -Lo /tmp/android-ndk.zip $NDK_DL
+      - run: unzip /tmp/android-ndk.zip -d /opt/ndk/
+      - run: mv /opt/ndk/android-ndk-* $NDK_PATH
+      - run: export PATH="$PATH:$NDK_PATH"
+      - run: sudo apt-get install -y zip unzip make
+      - run: mkdir /tmp/$ABI
+      - name: compile
+        run: make
+        workdir: sqlite-$ABI
+      - name: make magisk module
+      - name: publish
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifacts
+          path: /tmp/armv7/sqlite-armv7.zip
+  all:
+    runs-on: ubuntu-latest
+    env:
+      ABI="all"
+    steps:
+      - uses: actions/checkout@v2
+      - run: curl -Lo /tmp/android-ndk.zip $NDK_DL
+      - run: unzip /tmp/android-ndk.zip -d /opt/ndk/
+      - run: mv /opt/ndk/android-ndk-* $NDK_PATH
+      - run: export PATH="$PATH:$NDK_PATH"
+      - run: sudo apt-get install -y zip unzip make
+      - run: mkdir /tmp/$ABI
+      - name: compile
+        run: make
+        workdir: sqlite-$ABI
+      - name: make magisk module
+      - name: publish
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifacts
+          path: /tmp/armv7/sqlite-armv7.zip
