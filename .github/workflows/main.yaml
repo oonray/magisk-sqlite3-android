@@ -1,15 +1,15 @@
 name: build
 on: [push]
 env:
-  NDK_DL="https://dl.google.com/android/repository/android-ndk-r27c-linux.zip"
-  NDK_PATH="/opt/ndk/android-ndk"
-  SQLITE_VERSION=3480000
-  SQLITE_YEAR=2025
+  NDK_DL: "https://dl.google.com/android/repository/android-ndk-r27c-linux.zip"
+  NDK_PATH: "/opt/ndk/android-ndk"
+  SQLITE_VERSION: 3480000
+  SQLITE_YEAR: 2025
 jobs:
   armv7:
     runs-on: ubuntu-latest
     env:
-      ABI="armeabi-v7a"
+      ABI: "armeabi-v7a"
     steps:
       - uses: actions/checkout@v2
       - run: curl -Lo /tmp/android-ndk.zip $NDK_DL
@@ -34,7 +34,7 @@ jobs:
   x86_64:
     runs-on: ubuntu-latest
     env:
-      ABI="x86_64"
+      ABI: "x86_64"
     steps:
       - uses: actions/checkout@v2
       - run: curl -Lo /tmp/android-ndk.zip $NDK_DL
@@ -59,7 +59,7 @@ jobs:
   all:
     runs-on: ubuntu-latest
     env:
-      ABI="all"
+      ABI: "all"
     steps:
       - uses: actions/checkout@v2
       - run: curl -Lo /tmp/android-ndk.zip $NDK_DL
