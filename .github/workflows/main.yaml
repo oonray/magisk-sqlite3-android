@@ -20,12 +20,12 @@ jobs:
       - run: mkdir /tmp/$ABI
       - name: compile
         run: make
-         working-directory: sqlite-$ABI
+        working-directory: sqlite-$ABI
       - name: Copy bin to zip
         run: cp $GITHUB_WORKSPACE/android-$ABI/obj/local/$ABI/sqlite3-static $GITHUB_WORKSPACE/magisk-module/system/xbin/sqlite3
       - name: make magisk module
         run: zip -b $GITHUB_WORKSPACE/magisk-module/* /tmp/armv7/sqlite-$ABI.zip
-         working-directory: /tmp/$ABI/
+        working-directory: /tmp/$ABI/
       - name: publish
         uses: actions/upload-artifact@v2
         with:
@@ -45,12 +45,12 @@ jobs:
       - run: mkdir /tmp/$ABI
       - name: compile
         run: make
-         working-directory: sqlite-$ABI
+        working-directory: sqlite-$ABI
       - name: Copy bin to zip
         run: cp $GITHUB_WORKSPACE/android-$ABI/obj/local/$ABI/sqlite3-static $GITHUB_WORKSPACE/magisk-module/system/xbin/sqlite3
       - name: make magisk module
         run: zip -b $GITHUB_WORKSPACE/magisk-module/* /tmp/armv7/sqlite-$ABI.zip
-         working-directory: /tmp/$ABI/
+        working-directory: /tmp/$ABI/
       - name: publish
         uses: actions/upload-artifact@v2
         with:
@@ -70,12 +70,12 @@ jobs:
       - run: mkdir /tmp/$ABI
       - name: compile
         run: make
-         working-directory: sqlite-$ABI
+        working-directory: sqlite-$ABI
       - name: Copy bin to zip
         run: cp $GITHUB_WORKSPACE/android-$ABI/obj/local/$ABI/sqlite3-static $GITHUB_WORKSPACE/magisk-module/system/xbin/sqlite3
       - name: make magisk module
         run: zip -b $GITHUB_WORKSPACE/magisk-module/* /tmp/armv7/sqlite-$ABI.zip
-         working-directory: /tmp/$ABI/
+        working-directory: /tmp/$ABI/
       - name: publish
         uses: actions/upload-artifact@v2
         with:
