@@ -21,7 +21,9 @@ jobs:
       - name: compile
         run: make
         working-directory: sqlite-armeabi-v7a
-      - run: pwd
+      - run: ls $GITHUB_WORKSPACE/magisk-module/
+      - run: ls $GITHUB_WORKSPACE/magisk-module/system/
+      - run: ls $GITHUB_WORKSPACE/magisk-module/system/xbin/
       - name: Copy bin to zip
         run: cp "$GITHUB_WORKSPACE/sqlite-$ABI/obj/local/$ABI/sqlite3-static" "magisk-module/system/xbin/"
       - run: cp "magisk-module/system/xbin/sqlite3" "magisk-module/system/xbin/sqlite3"
