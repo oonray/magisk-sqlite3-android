@@ -20,17 +20,17 @@ jobs:
       - run: mkdir /tmp/$ABI
       - name: compile
         run: make
-        working-directory: sqlite-$ABI
+        working-directory: sqlite-armeabi-v7a
       - name: Copy bin to zip
-        run: cp $GITHUB_WORKSPACE/android-$ABI/obj/local/$ABI/sqlite3-static $GITHUB_WORKSPACE/magisk-module/system/xbin/sqlite3
+        run: cp "$GITHUB_WORKSPACE/android-$ABI/obj/local/$ABI/sqlite3-static" "$GITHUB_WORKSPACE/magisk-module/system/xbin/sqlite3"
       - name: make magisk module
-        run: zip -b $GITHUB_WORKSPACE/magisk-module/* /tmp/armv7/sqlite-$ABI.zip
-        working-directory: /tmp/$ABI/
+        run: zip -b "$GITHUB_WORKSPACE/magisk-module/*" "/tmp/$ABI/sqlite-$ABI.zip"
+        working-directory: /tmp/armeabi-v7a
       - name: publish
         uses: actions/upload-artifact@v4
         with:
-          name: sqlite-$ABI.zip
-          path: /tmp/$ABI/sqlite-$ABI.zip
+          name: sqlite-armeabi-v7a.zip
+          path: /tmp/$ABI/sqlite-armeabi-v7a.zip
           overwrite: true
   x86_64:
     runs-on: ubuntu-latest
@@ -46,17 +46,17 @@ jobs:
       - run: mkdir /tmp/$ABI
       - name: compile
         run: make
-        working-directory: sqlite-$ABI
+        working-directory: sqlite-x86_64
       - name: Copy bin to zip
-        run: cp $GITHUB_WORKSPACE/android-$ABI/obj/local/$ABI/sqlite3-static $GITHUB_WORKSPACE/magisk-module/system/xbin/sqlite3
+        run: cp "$GITHUB_WORKSPACE/android-$ABI/obj/local/$ABI/sqlite3-static" "$GITHUB_WORKSPACE/magisk-module/system/xbin/sqlite3"
       - name: make magisk module
-        run: zip -b $GITHUB_WORKSPACE/magisk-module/* /tmp/armv7/sqlite-$ABI.zip
-        working-directory: /tmp/$ABI/
+        run: zip -b "$GITHUB_WORKSPACE/magisk-module/*" "/tmp/$ABI/sqlite-$ABI.zip"
+        working-directory: /tmp/x86_64/
       - name: publish
         uses: actions/upload-artifact@v4
         with:
-          name: sqlite-$ABI.zip
-          path: /tmp/$ABI/sqlite-$ABI.zip
+          name: sqlite-x86_64.zip
+          path: /tmp/$ABI/sqlite-x86_64.zip
           overwrite: true
   all:
     runs-on: ubuntu-latest
@@ -72,15 +72,15 @@ jobs:
       - run: mkdir /tmp/$ABI
       - name: compile
         run: make
-        working-directory: sqlite-$ABI
+        working-directory: sqlite-all
       - name: Copy bin to zip
-        run: cp $GITHUB_WORKSPACE/android-$ABI/obj/local/$ABI/sqlite3-static $GITHUB_WORKSPACE/magisk-module/system/xbin/sqlite3
+        run: cp "$GITHUB_WORKSPACE/android-$ABI/obj/local/$ABI/sqlite3-static" "$GITHUB_WORKSPACE/magisk-module/system/xbin/sqlite3"
       - name: make magisk module
-        run: zip -b $GITHUB_WORKSPACE/magisk-module/* /tmp/armv7/sqlite-$ABI.zip
-        working-directory: /tmp/$ABI/
+        run: zip -b "$GITHUB_WORKSPACE/magisk-module/*" "/tmp/$ABI/sqlite-$ABI.zip"
+        working-directory: /tmp/all/
       - name: publish
         uses: actions/upload-artifact@v4
         with:
-          name: sqlite-$ABI.zip
-          path: /tmp/$ABI/sqlite-$ABI.zip
+          name: sqlite-all.zip
+          path: /tmp/$ABI/sqlite-all.zip
           overwrite: true
