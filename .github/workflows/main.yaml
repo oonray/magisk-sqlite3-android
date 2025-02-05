@@ -15,7 +15,7 @@ jobs:
       - run: curl -Lo /tmp/android-ndk.zip $NDK_DL
       - run: unzip /tmp/android-ndk.zip -d /opt/ndk/
       - run: mv /opt/ndk/android-ndk-* $NDK_PATH
-      - run: export PATH="$PATH:$NDK_PATH"
+      - run: echo "$NDK_PATH" >> $GITHUB_PATH
       - run: sudo apt-get install -y zip unzip make
       - run: mkdir /tmp/$ABI
       - name: compile
@@ -41,7 +41,7 @@ jobs:
       - run: curl -Lo /tmp/android-ndk.zip $NDK_DL
       - run: unzip /tmp/android-ndk.zip -d /opt/ndk/
       - run: mv /opt/ndk/android-ndk-* $NDK_PATH
-      - run: export PATH="$PATH:$NDK_PATH"
+      - run: echo "$NDK_PATH" >> $GITHUB_PATH
       - run: sudo apt-get install -y zip unzip make
       - run: mkdir /tmp/$ABI
       - name: compile
@@ -67,7 +67,7 @@ jobs:
       - run: curl -Lo /tmp/android-ndk.zip $NDK_DL
       - run: unzip /tmp/android-ndk.zip -d /opt/ndk/
       - run: mv /opt/ndk/android-ndk-* $NDK_PATH
-      - run: export PATH="$PATH:$NDK_PATH"
+      - run: echo "$NDK_PATH" >> $GITHUB_PATH
       - run: sudo apt-get install -y zip unzip make
       - run: mkdir /tmp/$ABI
       - name: compile
