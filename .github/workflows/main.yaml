@@ -31,7 +31,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: sqlite-armeabi-v7a.zip
-          path: /tmp/$ABI/sqlite-armeabi-v7a.zip
+          path: /tmp/armeabi-v7a/sqlite-armeabi-v7a.zip
           overwrite: true
   x86_64:
     runs-on: ubuntu-latest
@@ -58,5 +58,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: sqlite-x86_64.zip
-          path: /tmp/$ABI/sqlite-x86_64.zip
+          path: /tmp/x86_64/sqlite-x86_64.zip
           overwrite: true
