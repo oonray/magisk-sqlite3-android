@@ -25,8 +25,8 @@ jobs:
       - name: Copy bin to zip
         run: cp "$GITHUB_WORKSPACE/sqlite-$ABI/obj/local/$ABI/sqlite3-static" "$GITHUB_WORKSPACE/magisk-module/system/xbin/sqlite3"
       - name: make magisk module
-        run: zip -b "$GITHUB_WORKSPACE/magisk-module/*" "/tmp/$ABI/sqlite-$ABI.zip"
-        working-directory: /tmp/armeabi-v7a
+        run: zip -r "/tmp/$ABI/sqlite-$ABI.zip" "*"
+        working-directory: magisk-module
       - name: publish
         uses: actions/upload-artifact@v4
         with:
@@ -52,41 +52,11 @@ jobs:
       - name: Copy bin to zip
         run: cp "$GITHUB_WORKSPACE/sqlite-$ABI/obj/local/$ABI/sqlite3-static" "$GITHUB_WORKSPACE/magisk-module/system/xbin/sqlite3"
       - name: make magisk module
-        run: zip -b "$GITHUB_WORKSPACE/magisk-module/*" "/tmp/$ABI/sqlite-$ABI.zip"
-        working-directory: /tmp/x86_64/
+        run: zip -r "/tmp/$ABI/sqlite-$ABI.zip" "*"
+        working-directory: magisk-module
       - name: publish
         uses: actions/upload-artifact@v4
         with:
           name: sqlite-x86_64.zip
           path: /tmp/$ABI/sqlite-x86_64.zip
           overwrite: true
-            #  all:
-            #    runs-on: ubuntu-latest
-            #    env:
-            #      ABI: "all"
-            #    steps:
-            #      - uses: actions/checkout@v2
-            #      - run: curl -Lo /tmp/android-ndk.zip $NDK_DL
-            #      - run: unzip /tmp/android-ndk.zip -d /opt/ndk/
-            #      - run: mv /opt/ndk/android-ndk-* $NDK_PATH
-            #      - run: echo "$NDK_PATH" >> $GITHUB_PATH
-            #      - run: sudo apt-get install -y zip unzip make
-            #      - run: mkdir /tmp/$ABI
-            #      - name: compile
-            #        run: make
-            #        working-directory: sqlite-all
-            #      - run: "ls $GITHUB_WORKSPACE/magisk-module/"
-            #      - run: "ls $GITHUB_WORKSPACE/magisk-module/system/"
-            #      - run: "ls $GITHUB_WORKSPACE/magisk-module/system/xbin"
-            #      - name: Copy bin to zip
-            #        run: cp "$GITHUB_WORKSPACE/sqlite-$ABI/obj/local/$ABI/sqlite3-static" "$GITHUB_WORKSPACE/magisk-module/system/xbin/"
-            #      - run: cp "$GITHUB_WORKSPACE/magisk-module/system/xbin/sqlite3-static" "$GITHUB_WORKSPACE/magisk-module/system/xbin/sqlite3"
-            #      - name: make magisk module
-            #        run: zip -b "$GITHUB_WORKSPACE/magisk-module/*" "/tmp/$ABI/sqlite-$ABI.zip"
-            #        working-directory: /tmp/all/
-            #      - name: publish
-            #        uses: actions/upload-artifact@v4
-            #        with:
-            #          name: sqlite-all.zip
-            #          path: /tmp/$ABI/sqlite-all.zip
-            #          overwrite: true
