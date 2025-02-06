@@ -25,7 +25,7 @@ jobs:
       - name: Copy bin to zip
         run: cp "$GITHUB_WORKSPACE/sqlite-$ABI/obj/local/$ABI/sqlite3-static" "$GITHUB_WORKSPACE/magisk-module/system/xbin/sqlite3"
       - name: make magisk module
-        run: zip -r "/tmp/$ABI/sqlite-$ABI.zip" "*"
+        run: zip -r "/tmp/$ABI/sqlite-$ABI.zip" "./*"
         working-directory: magisk-module
       - name: publish
         uses: actions/upload-artifact@v4
@@ -52,7 +52,7 @@ jobs:
       - name: Copy bin to zip
         run: cp "$GITHUB_WORKSPACE/sqlite-$ABI/obj/local/$ABI/sqlite3-static" "$GITHUB_WORKSPACE/magisk-module/system/xbin/sqlite3"
       - name: make magisk module
-        run: zip -r "/tmp/$ABI/sqlite-$ABI.zip" "*"
+        run: zip -r "/tmp/$ABI/sqlite-$ABI.zip" "./*"
         working-directory: magisk-module
       - name: publish
         uses: actions/upload-artifact@v4
